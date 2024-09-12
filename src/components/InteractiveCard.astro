@@ -1,0 +1,57 @@
+---
+// src/components/InteractiveCard.astro
+const { class: className } = Astro.props;
+---
+
+<div class={`interactive-card ${className}`}>
+  <slot />
+</div>
+
+<script>
+  function createInteractiveCard(element) {
+    let isHovered = false;
+    let mousePosition = { x: 0, y: 0 };
+
+    function updateMousePosition(e) {
+      const rect = element.getBoundingClientRect();
+      mousePosition = {
+        x: (e.clientX - rect.left) / rect.width,
+        y: (e.clientY - rect.top) / rect.height,
+      };
+      updateCardStyle();
+    }
+
+    function updateCardStyle() {
+      if (isHovered) {
+        element.style.transition = 'all 0.3s ease';
+        element.style.transform = `perspective(1000px) rotateX(${(mousePosition.y - 0.5) * 10}deg) rotateY(${(mousePosition.x - 0.5) * 10}deg) scale(1.05)`;
+        element.style.boxShadow = `
+          ${(mousePosition.x - 0.5) * 20}px 
+          ${(mousePosition.y - 0.5) * 20}px 
+          30px rgba(0, 0, 0, 0.2),
+          0 4px 6px rgba(0, 0, 0, 0.1),
+          0 1px 3px rgba(0, 0, 0, 0.1)
+        `;
+      } else {
+        element.style.transition = 'all 0.3s ease';
+        element.style.transform = '';
+        element.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1)';
+      }
+    }
+
+    element.addEventListener('mouseenter', () => {
+      isHovered = true;
+      element.addEventListener('mousemove', updateMousePosition);
+    });
+
+    element.addEventListener('mouseleave', () => {
+      isHovered = false;
+      element.removeEventListener('mousemove', updateMousePosition);
+      updateCardStyle();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.interactive-card').forEach(createInteractiveCard);
+  });
+</script>

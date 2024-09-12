@@ -1,0 +1,26 @@
+---
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import ContactInfo from '../components/ContactInfo.astro';
+import AboutMe from '../components/AboutMe.astro';
+import WorkExperience from '../components/WorkExperience.astro';
+import Education from '../components/Education.astro';
+import GithubRepos from '../components/GithubRepos.astro';
+---
+
+<BaseLayout title="Bento Gonzalo Azaldegi">
+  <div class="fixed inset-0 -z-10 h-full w-full bg-white dark:bg-[#101415]">
+    <div class="fixed inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#2a2a2a_1px,transparent_1px),linear-gradient(to_bottom,#2a2a2a_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
+  </div>
+  <div class="container mx-auto p-4 max-w-7xl from-blue-50 to-cyan-50 dark:from-blue-200 dark:to-cyan-200">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <ProfileCard />
+      <ContactInfo />
+      <AboutMe />
+      <WorkExperience />
+      <Education />
+      <GithubRepos />
+    </div>
+  </div>
+</BaseLayout>

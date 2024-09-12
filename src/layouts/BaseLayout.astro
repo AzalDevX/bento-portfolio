@@ -1,0 +1,20 @@
+---
+// src/layouts/BaseLayout.astro
+import ThemeSwitch from '../components/ThemeSwitch.astro';
+const { title } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/jpg" href="./Logo_AzalDev-inverted.jpg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <ThemeSwitch />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
