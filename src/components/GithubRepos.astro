@@ -50,9 +50,9 @@ async function getPinnedRepos() {
 const pinnedRepos = await getPinnedRepos();
 ---
 
-<InteractiveCard class="col-span-1 md:col-span-2 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-500 dark:to-orange-600 rounded-lg">
-  <h2 class="text-xl font-semibold mb-4 flex items-center text-gray-800 ">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 text-orange-500 dark:text-black">
+<InteractiveCard class="col-span-1 md:col-span-2 p-6 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-orange-900 dark:to-yellow-950 rounded-lg">
+  <h2 class="text-xl font-semibold mb-4 flex items-center text-gray-800 dark:text-white">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 text-orange-500 dark:text-white">
       <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
     </svg>
     Proyectos Destacados de GitHub 
@@ -60,9 +60,9 @@ const pinnedRepos = await getPinnedRepos();
   {pinnedRepos && pinnedRepos.length > 0 ? (
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {pinnedRepos.map((repo) => (
-        <InteractiveCard class="p-4 bg-gradient-to-br from-yellow-50 to-white dark:from-yellow-500 dark:to-gray-500  rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-          <h3 class="text-lg font-medium text-gray-900 ">{repo.name}</h3>
-          <p class="text-gray-600 dark:text-gray-600 text-sm mb-2">{repo.description || 'No description available'}</p>
+        <InteractiveCard class="p-4 bg-gradient-to-br from-yellow-50 to-white dark:bg-none dark:border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+          <h3 class="text-lg font-medium text-gray-900">{repo.name}</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm mb-2 ">{repo.description || 'No description available'}</p>
           <div class="flex items-center space-x-4 mb-2">
             {repo.primaryLanguage && (
               <span class="flex items-center text-sm">
