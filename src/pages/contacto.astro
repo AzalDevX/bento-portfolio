@@ -1,0 +1,300 @@
+---
+import Layout from '../layouts/BaseLayout.astro';
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<Layout title="Contacto | Tu Portfolio">
+  <ViewTransitions />
+  
+  <main class="min-h-screen p-6 md:p-8">
+    <div class="max-w-6xl mx-auto grid gap-6 animate-fade-in">
+      <!-- Encabezado tipo bento -->
+      <div class="bg-white dark:bg-beige-800 rounded-2xl p-8 shadow-beige-lg dark:shadow-chocolate-lg hover:shadow-chocolate-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+        <h1 class="text-3xl font-bold text-chocolate-800 dark:text-beige-100 animate-slide-in-bottom">
+          Contacto
+        </h1>
+        <p class="mt-2 text-chocolate-600 dark:text-beige-300 animate-fade-in-delay">
+          ¿Tienes alguna pregunta o propuesta? No dudes en contactarme.
+        </p>
+      </div>
+
+      <!-- Grid de información de contacto y formulario -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Tarjeta de información de contacto -->
+        <div class="bg-white dark:bg-beige-800 rounded-2xl p-8 shadow-beige-lg dark:shadow-chocolate-lg hover:shadow-chocolate-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-in-left">
+          <h2 class="text-xl font-semibold text-chocolate-800 dark:text-beige-100 mb-6">
+            Información de Contacto
+          </h2>
+          <div class="space-y-4">
+            <div class="flex items-center space-x-3 hover:translate-x-2 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-chocolate-600 dark:text-beige-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span class="text-chocolate-700 dark:text-beige-200">me@azaldev.com</span>
+            </div>
+            <div class="flex items-center space-x-3 hover:translate-x-2 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-chocolate-600 dark:text-beige-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span class="text-chocolate-700 dark:text-beige-200">Bilbao, España</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="bg-white dark:bg-beige-800 rounded-2xl p-8 shadow-beige-lg dark:shadow-chocolate-lg hover:shadow-chocolate-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 animate-slide-in-right">
+          <form id="contactForm" class="space-y-4">
+            <div class="grid gap-4">
+              <!-- Nombre y Apellidos en grid -->
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div class="group">
+                  <label for="nombre" class="block text-sm font-medium text-chocolate-700 dark:text-beige-200 mb-1 group-hover:text-chocolate-500 transition-colors duration-200">
+                    Nombre *
+                  </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    required
+                    class="w-full px-4 py-2 rounded-xl border-beige-300 dark:border-beige-600 bg-beige-50 dark:bg-beige-700 text-chocolate-800 dark:text-beige-50 focus:ring-2 focus:ring-chocolate-500 focus:border-transparent transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02]"
+                  />
+                </div>
+                <div class="group">
+                  <label for="apellidos" class="block text-sm font-medium text-chocolate-700 dark:text-beige-200 mb-1 group-hover:text-chocolate-500 transition-colors duration-200">
+                    Apellidos
+                  </label>
+                  <input
+                    type="text"
+                    id="apellidos"
+                    name="apellidos"
+                    class="w-full px-4 py-2 rounded-xl border-beige-300 dark:border-beige-600 bg-beige-50 dark:bg-beige-700 text-chocolate-800 dark:text-beige-50 focus:ring-2 focus:ring-chocolate-500 focus:border-transparent transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02]"
+                  />
+                </div>
+              </div>
+
+              <!-- Empresa -->
+              <div class="group">
+                <label for="empresa" class="block text-sm font-medium text-chocolate-700 dark:text-beige-200 mb-1 group-hover:text-chocolate-500 transition-colors duration-200">
+                  Empresa
+                </label>
+                <input
+                  type="text"
+                  id="empresa"
+                  name="empresa"
+                  class="w-full px-4 py-2 rounded-xl border-beige-300 dark:border-beige-600 bg-beige-50 dark:bg-beige-700 text-chocolate-800 dark:text-beige-50 focus:ring-2 focus:ring-chocolate-500 focus:border-transparent transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02]"
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="group">
+                <label for="email" class="block text-sm font-medium text-chocolate-700 dark:text-beige-200 mb-1 group-hover:text-chocolate-500 transition-colors duration-200">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-2 rounded-xl border-beige-300 dark:border-beige-600 bg-beige-50 dark:bg-beige-700 text-chocolate-800 dark:text-beige-50 focus:ring-2 focus:ring-chocolate-500 focus:border-transparent transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02]"
+                />
+              </div>
+
+              <!-- Asunto -->
+              <div class="group">
+                <label for="asunto" class="block text-sm font-medium text-chocolate-700 dark:text-beige-200 mb-1 group-hover:text-chocolate-500 transition-colors duration-200">
+                  Asunto *
+                </label>
+                <input
+                  type="text"
+                  id="asunto"
+                  name="asunto"
+                  required
+                  class="w-full px-4 py-2 rounded-xl border-beige-300 dark:border-beige-600 bg-beige-50 dark:bg-beige-700 text-chocolate-800 dark:text-beige-50 focus:ring-2 focus:ring-chocolate-500 focus:border-transparent transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02]"
+                />
+              </div>
+
+              <!-- Mensaje -->
+              <div class="group">
+                <label for="mensaje" class="block text-sm font-medium text-chocolate-700 dark:text-beige-200 mb-1 group-hover:text-chocolate-500 transition-colors duration-200">
+                  Mensaje *
+                </label>
+                <textarea
+                  id="mensaje"
+                  name="mensaje"
+                  rows="4"
+                  required
+                  class="w-full px-4 py-2 rounded-xl border-beige-300 dark:border-beige-600 bg-beige-50 dark:bg-beige-700 text-chocolate-800 dark:text-beige-50 focus:ring-2 focus:ring-chocolate-500 focus:border-transparent transition-all duration-200 transform hover:scale-[1.02] focus:scale-[1.02]"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <button
+              type="submit"
+              class="w-full py-3 px-6 bg-chocolate-600 hover:bg-chocolate-700 text-white rounded-xl font-medium shadow-chocolate transition-all duration-300 hover:shadow-chocolate-lg focus:outline-none focus:ring-2 focus:ring-chocolate-500 focus:ring-offset-2 disabled:opacity-50 transform hover:scale-[1.02] active:scale-95"
+            >
+              Enviar mensaje
+            </button>
+
+            <!-- Mensaje de estado -->
+            <div id="statusMessage" class="hidden text-center mt-4 p-4 rounded-xl transform transition-all duration-300"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideInBottom {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-fade-in-delay {
+    animation: fadeIn 0.6s ease-out 0.3s both;
+  }
+
+  .animate-slide-in-bottom {
+    animation: slideInBottom 0.6s ease-out;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+
+  /* Animación para campos del formulario */
+  input, textarea {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  input:focus, textarea:focus {
+    transform: scale(1.01);
+  }
+
+  .group:hover label {
+    color: var(--chocolate-600);
+  }
+</style>
+
+<script>
+  import emailjs from '@emailjs/browser';
+
+  // Inicializa EmailJS con la Public Key desde las variables de entorno
+  emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
+  
+
+  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const statusMessage = document.getElementById('statusMessage');
+  const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+  if (form && statusMessage && submitButton) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitButton.disabled = true;
+
+      try {
+        statusMessage.className = 'block text-center mt-4 p-4 rounded-xl bg-chocolate-100 dark:bg-beige-700 text-chocolate-600 dark:text-beige-200 animate-fade-in transform transition-all duration-300';
+        statusMessage.textContent = 'Enviando mensaje...';
+        statusMessage.style.display = 'block';
+
+        const formData = {
+          name: (document.getElementById('nombre') as HTMLInputElement).value,
+          surname: (document.getElementById('apellidos') as HTMLInputElement).value,
+          company: (document.getElementById('empresa') as HTMLInputElement).value,
+          email: (document.getElementById('email') as HTMLInputElement).value,
+          subject: (document.getElementById('asunto') as HTMLInputElement).value,
+          message: (document.getElementById('mensaje') as HTMLTextAreaElement).value,
+        };
+
+        await emailjs.send(
+          import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+          import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+          formData
+        );
+
+        statusMessage.className = 'block text-center mt-4 p-4 rounded-xl bg-green-100 dark:bg-green-800/30 text-green-600 dark:text-green-200 animate-fade-in transform scale-105 transition-all duration-300';
+        statusMessage.textContent = '¡Mensaje enviado con éxito!';
+        form.reset();
+
+      } catch (error) {
+        console.error('Error:', error);
+        statusMessage.className = 'block text-center mt-4 p-4 rounded-xl bg-red-100 dark:bg-red-800/30 text-red-600 dark:text-red-200 animate-fade-in transform scale-105 transition-all duration-300';
+        statusMessage.textContent = 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
+      } finally {
+        submitButton.disabled = false;
+        
+        // Ocultar el mensaje después de 5 segundos con animación
+        setTimeout(() => {
+          statusMessage.style.opacity = '0';
+          statusMessage.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            statusMessage.style.display = 'none';
+            statusMessage.style.opacity = '1';
+            statusMessage.style.transform = 'scale(1)';
+          }, 300);
+        }, 5000);
+      }
+    });
+
+    // Añadir efecto de ondulación (ripple) al botón
+    submitButton.addEventListener('click', function(e) {
+      const ripple = document.createElement('div');
+      const rect = this.getBoundingClientRect();
+      ripple.className = 'absolute bg-white/20 rounded-full pointer-events-none';
+      ripple.style.left = `${e.clientX - rect.left}px`;
+      ripple.style.top = `${e.clientY - rect.top}px`;
+      ripple.style.width = ripple.style.height = '0';
+      ripple.style.transform = 'translate(-50%, -50%)';
+      this.appendChild(ripple);
+      
+      requestAnimationFrame(() => {
+        ripple.style.width = ripple.style.height = '300px';
+        ripple.style.opacity = '0';
+        setTimeout(() => ripple.remove(), 1000);
+      });
+    });
+  }
+</script>

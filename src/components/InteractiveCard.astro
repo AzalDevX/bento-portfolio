@@ -4,54 +4,208 @@ const { class: className } = Astro.props;
 ---
 
 <div class={`interactive-card ${className}`}>
-  <slot />
+  <div class="card-content">
+    <slot />
+  </div>
+  <div class="card-shine"></div>
+  <div class="card-glow"></div>
 </div>
 
+<style>
+  .interactive-card {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-shine {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      circle at var(--shine-x, 50%) var(--shine-y, 50%),
+      rgba(255, 255, 255, 0.4) 0%,
+      transparent 50%
+    );
+    transition: opacity 0.3s;
+    z-index: 3;
+  }
+
+  .card-glow {
+    position: absolute;
+    inset: -20px;
+    opacity: 0;
+    background: radial-gradient(
+      circle at var(--glow-x, 50%) var(--glow-y, 50%),
+      rgba(180, 126, 72, 0.4) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1;
+  }
+</style>
+
 <script>
-  function createInteractiveCard(element) {
+  function createInteractiveCard(element: HTMLElement) {
     let isHovered = false;
     let mousePosition = { x: 0, y: 0 };
+    const shine = element.querySelector('.card-shine') as HTMLElement;
+    const glow = element.querySelector('.card-glow') as HTMLElement;
+    let rafId: number;
+    let startRotation = { x: 0, y: 0 };
+    let targetRotation = { x: 0, y: 0 };
+    let currentRotation = { x: 0, y: 0 };
 
-    function updateMousePosition(e) {
+    function lerp(start: number, end: number, factor: number) {
+      return start + (end - start) * factor;
+    }
+
+    function updateMousePosition(e: MouseEvent) {
       const rect = element.getBoundingClientRect();
       mousePosition = {
         x: (e.clientX - rect.left) / rect.width,
         y: (e.clientY - rect.top) / rect.height,
       };
-      updateCardStyle();
+
+      // Actualizar posición del brillo y resplandor
+      shine.style.setProperty('--shine-x', `${mousePosition.x * 100}%`);
+      shine.style.setProperty('--shine-y', `${mousePosition.y * 100}%`);
+      glow.style.setProperty('--glow-x', `${mousePosition.x * 100}%`);
+      glow.style.setProperty('--glow-y', `${mousePosition.y * 100}%`);
+
+      // Calcular rotación objetivo
+      targetRotation = {
+        x: (mousePosition.y - 0.5) * 10,
+        y: (mousePosition.x - 0.5) * 10,
+      };
     }
 
     function updateCardStyle() {
-      if (isHovered) {
-        element.style.transition = 'all 0.3s ease';
-        element.style.transform = `perspective(1000px) rotateX(${(mousePosition.y - 0.5) * 10}deg) rotateY(${(mousePosition.x - 0.5) * 10}deg) scale(1.05)`;
-        element.style.boxShadow = `
-          ${(mousePosition.x - 0.5) * 20}px 
-          ${(mousePosition.y - 0.5) * 20}px 
-          30px rgba(0, 0, 0, 0.2),
-          0 4px 6px rgba(0, 0, 0, 0.1),
-          0 1px 3px rgba(0, 0, 0, 0.1)
-        `;
-      } else {
-        element.style.transition = 'all 0.3s ease';
-        element.style.transform = '';
-        element.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1)';
+      if (!isHovered) {
+        targetRotation = { x: 0, y: 0 };
+      }
+
+      // Aplicar interpolación suave a la rotación
+      currentRotation.x = lerp(currentRotation.x, targetRotation.x, 0.1);
+      currentRotation.y = lerp(currentRotation.y, targetRotation.y, 0.1);
+
+      const transform = `
+        perspective(1000px) 
+        rotateX(${currentRotation.x}deg) 
+        rotateY(${currentRotation.y}deg)
+        scale(${isHovered ? 1.02 : 1})
+        translateZ(0)
+      `;
+
+      element.style.transform = transform;
+
+      // Continuar la animación si hay movimiento significativo
+      if (
+        Math.abs(currentRotation.x - targetRotation.x) > 0.01 ||
+        Math.abs(currentRotation.y - targetRotation.y) > 0.01
+      ) {
+        rafId = requestAnimationFrame(updateCardStyle);
       }
     }
 
-    element.addEventListener('mouseenter', () => {
+    function startAnimation() {
       isHovered = true;
+      shine.style.opacity = '1';
+      glow.style.opacity = '1';
+      element.style.transition = 'transform 0.1s ease';
       element.addEventListener('mousemove', updateMousePosition);
+      rafId = requestAnimationFrame(updateCardStyle);
+
+      // Añadir efecto de pulso sutil
+      element.style.animation = 'pulse 2s infinite';
+    }
+
+    function stopAnimation() {
+      isHovered = false;
+      shine.style.opacity = '0';
+      glow.style.opacity = '0';
+      element.style.transition = 'all 0.5s ease';
+      element.removeEventListener('mousemove', updateMousePosition);
+      element.style.animation = 'none';
+      updateCardStyle();
+    }
+
+    // Eventos táctiles
+    let touchStartTime: number;
+    element.addEventListener('touchstart', (e) => {
+      touchStartTime = Date.now();
+      startAnimation();
     });
 
-    element.addEventListener('mouseleave', () => {
-      isHovered = false;
-      element.removeEventListener('mousemove', updateMousePosition);
-      updateCardStyle();
+    element.addEventListener('touchend', () => {
+      const touchDuration = Date.now() - touchStartTime;
+      if (touchDuration < 200) { // Tap rápido
+        element.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          element.style.transform = 'scale(1)';
+        }, 150);
+      }
+      stopAnimation();
     });
+
+    // Eventos del mouse
+    element.addEventListener('mouseenter', startAnimation);
+    element.addEventListener('mouseleave', stopAnimation);
+    element.addEventListener('click', () => {
+      // Efecto de click
+      element.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        element.style.transform = 'scale(1)';
+      }, 150);
+    });
+
+    // Limpiar
+    return () => {
+      cancelAnimationFrame(rafId);
+      element.removeEventListener('mouseenter', startAnimation);
+      element.removeEventListener('mouseleave', stopAnimation);
+      element.removeEventListener('mousemove', updateMousePosition);
+    };
   }
 
+  // Crear keyframes para el efecto de pulso
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.005); }
+      100% { transform: scale(1); }
+    }
+
+    .interactive-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .interactive-card:hover {
+      box-shadow: 
+        0 10px 20px rgba(180, 126, 72, 0.2),
+        0 6px 6px rgba(180, 126, 72, 0.1),
+        0 0 100px -20px rgba(180, 126, 72, 0.3);
+    }
+
+    .interactive-card:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
+    }
+  `;
+  document.head.appendChild(style);
+
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.interactive-card').forEach(createInteractiveCard);
+    document.querySelectorAll('.interactive-card').forEach((card) => {
+      createInteractiveCard(card as HTMLElement);
+    });
   });
 </script>
