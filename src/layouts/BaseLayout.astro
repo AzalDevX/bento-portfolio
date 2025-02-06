@@ -1,9 +1,8 @@
 ---
 // src/layouts/BaseLayout.astro
+import 'aos/dist/aos.css'; // Importar los estilos de AOS
 import ThemeSwitch from '../components/ThemeSwitch.astro';
 const { title } = Astro.props;
-
-
 ---
 
 <html lang="es">
@@ -13,28 +12,40 @@ const { title } = Astro.props;
     <link rel="icon" type="image/jpg" href="./Logo_AzalDev-inverted.jpg" />
     <title>{title}</title>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FME15F20SL"></script>
+    <script>
+      const GTAG = import.meta.env.PUBLIC_GTAG;
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FME15F20SL"></script>
-<script>
-  const GTAG = import.meta.env.PUBLIC_GTAG;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', GTAG);
-</script>
-
-    
+      gtag('config', GTAG);
+    </script>
   </head>
   <body>
-    <!-- <ThemeSwitch /> -->
+    <ThemeSwitch />
     <main class="min-h-screen flex flex-col">
-      <div class="fixed inset-0 -z-10 h-full w-full bg-beige-50">
+      <div class="fixed inset-0 -z-10 h-full w-full dark:bg-primary-900/90">
         <div class="fixed inset-0 bg-[linear-gradient(to_right,#e0cec7_1px,transparent_1px),linear-gradient(to_bottom,#e0cec7_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
       </div>
       <slot />
     </main>
+
+    <!-- Inicializar AOS -->
+    <script>
+      import aos from 'aos';
+      
+      // Inicializar AOS
+      document.addEventListener('DOMContentLoaded', () => {
+        aos.init({
+          duration: 800,
+          easing: 'ease-out-cubic',
+          once: true,
+          offset: 50,
+        });
+      });
+    </script>
   </body>
 </html>

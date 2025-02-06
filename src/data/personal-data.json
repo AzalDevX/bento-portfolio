@@ -1,0 +1,89 @@
+{
+  "profile": {
+    "name": "Gonzalo Azaldegi",
+    "title": "Desarrollador Web",
+    "image": "./profile-picture.png",
+    "about": "Apasionado de la programación, me defino por ser una persona con ganas de aprender. No me gusta ser el líder de un grupo pero a pesar de ello podría hacer el esfuerzo.",
+    "socialLinks": {
+      "github": "https://lalo.lol/gh",
+      "linkedin": "https://lalo.lol/in"
+    }
+  },
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "PHP",
+    "SQL",
+    "Java",
+    "Node.js",
+    "Vue",
+    "React",
+    "Tailwind",
+    "Astro"
+  ],
+  "contact": {
+    "phone": "+34-***-***-*01",
+    "email": "me@azaldev.com",
+    "location": {
+      "city": "Bilbao",
+      "country": "España",
+      "mapsUrl": "https://maps.app.goo.gl/wiToYoRsAoWDqT1z9"
+    }
+  },
+  "experience": [
+    {
+      "position": "Cofundador",
+      "company": "Tu Nueva Web",
+      "period": {
+        "start": "Agosto 2024",
+        "end": "Actualidad"
+      },
+      "responsibilities": [
+        "Diseño y desarrollo de páginas web personalizadas",
+        "Optimización para dispositivos móviles y SEO",
+        "Soporte técnico y actualizaciones constantes"
+      ]
+    },
+    {
+      "position": "Facturación / System Developer",
+      "company": "Accenture",
+      "location": "Bilbao",
+      "period": {
+        "start": "Marzo 2023",
+        "end": "Junio 2024"
+      },
+      "responsibilities": [
+        "En el grupo de Parametrizador",
+        "Programación de una aplicación en Visual Basic .NET",
+        "Automatización en Python"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "Técnico superior en Desarrollo de Aplicaciones Multiplataforma",
+      "institution": "FP Txurdinaga",
+      "period": {
+        "start": "Septiembre 2023",
+        "end": "Junio 2024"
+      }
+    },
+    {
+      "title": "Técnico superior en Desarrollo de Aplicaciones Web",
+      "institution": "FP Txurdinaga",
+      "period": {
+        "start": "Septiembre 2021",
+        "end": "Junio 2023"
+      }
+    },
+    {
+      "title": "Técnico en Sistemas Microinformáticos y Redes",
+      "institution": "FP Txurdinaga",
+      "period": {
+        "start": "Septiembre 2019",
+        "end": "Julio 2021"
+      }
+    }
+  ]
+}

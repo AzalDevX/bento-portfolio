@@ -1,11 +1,20 @@
 ---
 // src/components/AboutMe.astro
+import personalData from '../data/personal-data.json';
+const { profile } = personalData;
 ---
 
-<div class="interactive-card col-span-1 md:col-span-2 p-6 bg-gradient-to-br from-beige-100 to-beige-300 rounded-lg shadow-beige-md">
-  <h2 class="text-xl font-semibold mb-4 text-chocolate-800">Sobre mí</h2>
-  <p class="text-chocolate-700">
-    Apasionado de la programación, me defino por ser una persona con ganas de aprender. No me gusta ser el líder de un grupo pero a pesar de ello podría hacer el esfuerzo.
+<div 
+  class="col-span-1 md:col-span-2"
+  data-aos="fade-left"
+  data-aos-delay="200"
+>
+<div class="interactive-card h-full p-4 bg-gradient-to-br from-primary-100 to-primary-300 dark:from-secondary-800 dark:to-secondary-700 rounded-lg shadow-primary-md dark:shadow-secondary-md">
+  <h2 class="text-lg font-semibold mb-2 text-secondary-800 dark:text-primary-100">
+    Sobre mí
+  </h2>
+  <p class="text-secondary-700 dark:text-primary-200 text-sm sm:text-base">
+    {profile.about}
   </p>
 </div>
-
+</div>
